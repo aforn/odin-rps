@@ -1,4 +1,52 @@
 /*
+Create three buttons, one for each selection. Add an
+ event listener to the buttons that call your playRound
+  function with the correct playerSelection every time
+   a button is clicked. (you can keep the console.logs 
+   for this step)
+*/
+
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+
+/*
+Add a div for displaying results and change all of your
+ console.logs into DOM methods.
+*/
+
+let results = document.getElementsByClassName('results');
+let winner = document.getElementById('winner');
+let score = document.getElementById('score');
+
+let playerScoreDisplay = document.getElementById('player');
+let playerScore = 0;
+playerScoreDisplay.textContent = playerScore;
+let playerSelection;
+
+let computerScoreDisplay = document.getElementById('computer');
+let computerScore = 0;
+computerScoreDisplay.textContent = computerScore;
+let computerSelection;
+
+/*
+buttons call playRound() and tally(). tally() gets called with
+ results of playRound() and displays result and
+ totals as well as scores when finished
+ */
+rockButton.addEventListener('click', () => {
+    playRound("rock", getComputerChoice());
+});
+paperButton.addEventListener('click', () => {
+    playRound("paper", getComputerChoice());
+});
+scissorsButton.addEventListener('click', () => {
+    playRound("scissors", getComputerChoice());
+});
+
+
+
+/*
 getComputerChoice that will randomly return either
 ‘Rock’, ‘Paper’ or ‘Scissors’. We’ll use this function
 in the game to make the computer’s play.
@@ -7,11 +55,11 @@ in the game to make the computer’s play.
 function getComputerChoice() {
     switch (Math.ceil(Math.random()*3)) {
         case 1:
-            return "Rock";
+            return "rock";
         case 2:
-            return "Paper";
+            return "paper";
         case 3:
-            return "Scissors";
+            return "scissors";
         default:
             console.log("Anna check your random");        
     } 
@@ -25,7 +73,7 @@ Write a function that plays a single round of Rock Paper
  "You Lose! Paper beats Rock"
 
 Yours/Mine
-        |___rock____|___paper___|_scissors__
+        |___rock____|___paper___|_scissors__|
 rock    |    tie    |     L     |     W     |
         |     ~     |     ~     |     ~     |
 paper   |     W     |    tie    |     L     |
@@ -35,104 +83,65 @@ scissors|     L     |     W     |    tie    |
 */
 
 function playRound(playerSelection, computerSelection) {
-    let playerTest = playerSelection.toLowerCase();
-    let computerTest = computerSelection.toLowerCase();
-
     //check for tie
-    if (playerTest === computerTest) {
-        console.log("It's a tie!");
-        return "tie";
+    if (playerSelection === computerSelection) {
+        winner.textContent = "It's a tie!";
+        console.log("it's a tie!");
     }
 
     //check if player has "rock", check computer choice
-    if (playerTest === "rock") { 
-        if (computerTest === "paper") {
-            youLooseMessage();
-            return "loose";
+    else if (playerSelection === "rock") { 
+        if (computerSelection === "paper") {
+            tally("loose");
         } else {
-            youWinMessage();
-            return "win";
+            tally("win");
         }
     
     //check if player has "paper", check computer choice
-    } else if (playerTest === "paper") {
-        if (computerTest === "rock") {
-            youWinMessage();
-            return "win";
+    } else if (playerSelection === "paper") {
+        if (computerSelection === "rock") {
+            tally("win");2
         } else {
-            youLooseMessage();
-            return "loose";
+            tally("loose");
         }
     
     //player has "scissors", check computer choice
     } else {
-        if (computerTest === "rock") {
-            youLooseMessage();
-            return "loose";
+        if (computerSelection === "rock") {
+            tally("loose");
         }
-            youWinMessage();
-            return "win";
+            tally("win");
     }
 
-    //message functions
-    function youLooseMessage() {
-        console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
-    }
-
-    function youWinMessage() {
-        console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
-    }
-}
-
-/*
-Write a NEW function called game(). Call the playRound
- function inside of this one to play a 5 round game that 
- keeps score and reports a winner or loser at the end.
-
-At this point you should be using console.log() to display
- the results of each round and the winner at the end.
-Use prompt() to get input from the user. Read the docs
- here if you need to.
-Feel free to re-work your previous functions if you need
- to. Specifically, you might want to change the return 
- value to something more useful.
-Feel free to create more “helper” functions if you think
- it would be useful.
-*/
-
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let winner = "nobody";
-
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Enter your play: ", "Rock");
-        console.log(`round ${i + 1}, commence!`)
-
-        //error check player input
-        if (!(playerSelection.toLowerCase() === "rock" || 
-                playerSelection.toLowerCase() === "paper" || 
-                playerSelection.toLowerCase() === "scissors")) {
-            alert("Need to enter 'rock', 'paper', or 'scissors'. Check your spelling and punctuation. Always.");
-        }
-
-        let result = playRound(playerSelection, getComputerChoice());
-
+    /*
+    Tally score and updates score board. Display winner/loser
+     message if score reaches 5 for either player.
+    */
+    function tally(result) {
+        //increment scores and update score board
         if (result === "win") {
+            winner.textContent = `You Win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection}.`;  
             playerScore++;
+            playerScoreDisplay.textContent = playerScore;
+
+            console.log(`You win! ${playerSelection} beats ${computerSelection}.`);
+
         } else if ( result === "loose") {
+            winner.textContent = `You Lose! ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerSelection}.`;
             computerScore++;
+            computerScoreDisplay.textContent = computerScore;
+
+            console.log(`You lose! ${computerSelection} beats ${playerSelection}.`);
+        }
+
+        if (playerScore === 5 || computerScore === 5) {
+            winner.textContent = `GOOD GAME! ${playerScore === 5 ? "Player" : "Computer"} takes the cake.`
+            
+            playerScore = 0;
+            computerScore = 0;
+
+            playerScoreDisplay.textContent = playerScore;
+            computerScoreDisplay.textContent = computerScore;
         }
     }
-
-    if (playerScore > computerScore) {
-        winner = "player";
-    } else if (playerScore < computerScore) {
-        winner = "computer"
-    }
-
-    console.log("GOOD GAME!")
-    console.log(`player score: ${playerScore}`);
-    console.log(`computer score: ${computerScore}`);
-    console.log(`${winner} wins`);
 }

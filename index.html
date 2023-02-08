@@ -3,10 +3,28 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/style.css">
-        <script src="scripts/javascript.js"></script>
+        <script src="scripts/javascript.js" defer></script>
         <title>game on(e)</title>
     </head>
     <body>
-        <div class="result"></div>
+        <div class="results">
+            <div id="winner">
+                Commence the game!
+
+            </div>
+            <div id="score">
+                <h3>Score</h3>
+                Player: <div id="player"></div>
+                Computer: <div id="computer"></div>
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+          
     </body>
 </html>

@@ -1,3 +1,61 @@
 body    {
     background-color: cadetblue;
 }
+
+.wrapper{
+  position: relative;
+  top: 40vh;
+}
+.results{
+  border: 5px solid #FFAB33;
+  width: 200px;
+  height: 175px;
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+  background: #FF5733;
+}
+
+#winner {
+    border: 2px solid lightblue;
+    height: 30px;
+}
+
+#player {
+    color:lightsteelblue;
+}
+
+#computer {
+    color:lightgreen;
+}
+
+.buttons {
+    align-self: center;
+    text-align: center;
+    border: 2px solid lightpink;
+    margin: 10px;
+}
+button {
+    height: 40px;
+    width: 75px;
+    padding: 3px;
+    margin: 15px;
+}
+
+#button:hover{
+  background: #DFF30B;
+}
+
+#message{
+  font-size: 26px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.hide{
+  visibility: hidden;
+}
+
+.reveal{
+  visibility: visible;
+}
