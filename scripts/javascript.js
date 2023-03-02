@@ -15,16 +15,16 @@ Add a div for displaying results and change all of your
  console.logs into DOM methods.
 */
 
-let results = document.getElementsByClassName('results');
+let results = document.getElementsByClassName('results-container');
 let winner = document.getElementById('winner');
-let score = document.getElementById('score');
+//let score = document.getElementById('score-container');
 
-let playerScoreDisplay = document.getElementById('player');
+let playerScoreDisplay = document.getElementById('player-score');
 let playerScore = 0;
 playerScoreDisplay.textContent = playerScore;
 let playerSelection;
 
-let computerScoreDisplay = document.getElementById('computer');
+let computerScoreDisplay = document.getElementById('computer-score');
 let computerScore = 0;
 computerScoreDisplay.textContent = computerScore;
 let computerSelection;

@@ -7,23 +7,32 @@
         <title>game on(e)</title>
     </head>
     <body>
-        <div class="results">
-            <div id="winner">
-                Commence the game!
-
+        <div class="wrapper">
+            <div class="winner-container">
+                <div id="winner">
+                    Commence the game!
+                </div>
             </div>
-            <div id="score">
-                <h3>Score</h3>
-                Player: <div id="player"></div>
-                Computer: <div id="computer"></div>
 
+            <div class="buttons-container">
+                <button class="play-button" id="rock">
+                    <img src="images/rock.png"
+                    alt="hand showing rock">
+                </button>
+                <button class="play-button" id="paper">
+                    <img src="images/paper.png"
+                    alt="hand showing paper">
+                </button>
+                <button class="play-button" id="scissors">
+                    <img src="images/scissors.png"
+                    alt="hand showing scissors">
+                </button>
             </div>
-        </div>
-
-        <div class="buttons">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
+            
+            <div id="score-container">
+                <div id="player">Player: <b id="player-score"></b></div>
+                <div id="computer">Computer: <b id="computer-score"></b></div>
+            </div>
         </div>
           
     </body>
